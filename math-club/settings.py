@@ -30,7 +30,7 @@ else:
     #     }
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'resume_db',
+            'NAME': 'math_club',
             'USER': 'root',
             'PASSWORD': secrets.db_password,
             'HOST': '',
