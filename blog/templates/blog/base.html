@@ -1,0 +1,79 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>{% block title %}UTD Math Club{% endblock %}</title>
+		<meta charset=”utf-8”> 
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <meta name="description" content="Resume Maker">
+	    <meta name="author" content="Josh Cai">
+	    <!-- <link rel="shortcut icon" href="../../assets/ico/favicon.png"> -->
+		<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap_journal.css' %}" media="screen">
+		<link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}" media="screen">
+	</head>
+  <body>
+
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="{% url 'blog:index' %}">UTD Math Club</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li {% if nav == "home" %} class="active" {% endif %}><a href="{% url 'blog:index' %}">Home</a></li>
+            <li {% if nav == "blog" %} class="active" {% endif %}><a href="{% url 'blog:blog' %}">Blog</a></li>
+            <li {% if nav == "about" %} class="active" {% endif %}><a href="{% url 'blog:about' %}">About</a></li>
+          </ul>
+          {% if request.session.user %}
+          <div class="navbar-form navbar-right">
+          <a href="{% url 'blog:logout' %}"><button type="button" class="btn btn-info">Logout</button></a>
+	      </div>
+          {% else %}
+          <div style="margin-left:0;padding-left:0" class="navbar-form navbar-right">
+            <a href="{% url 'blog:signup' %}"><button class="btn btn-info">Sign Up</button></a>
+          </div>
+          <form style="padding-right:5px" action="{% url 'blog:login' %}" method="post" class="navbar-form navbar-right">
+      			{% csrf_token %}
+            <div class="form-group">
+              <input type="text" name="username" placeholder="Username" class="form-control">
+            </div>
+            <div class="form-group">
+              <input type="password" name="password" placeholder="Password" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-info">Login</button>
+          </form>
+          {% endif %}
+        </div><!--/.navbar-collapse -->
+      </div>
+    </div>
+    {% block jumbo %}
+
+    {% endblock jumbo %}
+
+    <div class="container">
+    	{% block content %}
+    	{% endblock content %}
+      <hr>
+
+      <footer class="text-center">
+        <p>&copy; Josh Cai 2013</p>
+      </footer>
+    </div> <!-- /container -->
+
+
+
+		<script src="http://code.jquery.com/jquery.js"></script>
+		<script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+    });
+    </script>
+    <script type="text/javascript" src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+	</body>
+</html>

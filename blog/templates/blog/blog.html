@@ -1,0 +1,35 @@
+{% extends "blog/base.html" %}
+
+{% block jumbo %}
+    <div class="jumbotron">
+      <div class="container">
+        <h1 class="topfix">Blog</h1>
+        <p>Post about interesting things in math here!</p>
+      </div>
+    </div>
+{% endblock jumbo %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-lg-3 sidenav">
+      <h2>Sidebar here</h2>
+    </div>
+    <div style="padding-left:50px;" class="col-lg-9">
+      {% for post in posts %}
+      <br />
+      <div class="row">
+        <div class="col-lg-9">
+          <h3 class="topfix">{{post.subject}}</h3>
+        </div>
+        <div class="col-lg-3 text-right">
+          <p>{{post.date_str}}</p>
+        </div>
+      </div>
+      {{post.content_rendered | safe}}
+      <hr>
+      {% endfor %}
+    </div>
+  </div>
+
+
+{% endblock %}

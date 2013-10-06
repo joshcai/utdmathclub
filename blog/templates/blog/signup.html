@@ -1,0 +1,31 @@
+{% extends "blog/base.html" %}
+
+
+{% block content %}
+<br />
+<div class="row">
+	<div class="col-md-4 centered text-center">
+		<form action="{% url 'blog:signup' %}" method="post">
+			<fieldset>
+				{% csrf_token %}
+				<h1>Create an Account</h1>
+				<br />
+				<!--<label>Subject</label>-->
+				<input type="text" name="name" value="{{ name }}" placeholder="Name" class="form-control" />
+				<br />
+				<input type="text" name="username" value="{{ username }}" placeholder="Username" class="form-control" />
+				<br />
+				<!--<label>Content</label>-->
+				<input type="password" name="password" placeholder="Password" class="form-control" />
+				<br />
+				<input type="password" name="password_confirm" placeholder="Password" class="form-control"/>
+				<br />
+				{% if error_message %}
+				<div class="alert alert-danger">{{ error_message | safe }}</div>
+				{% endif %}
+				<button type="submit" class="btn">Submit</button>
+			</fieldset>
+		</form>
+	</div>
+</div>
+{% endblock %}
