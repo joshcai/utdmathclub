@@ -88,7 +88,7 @@ STATIC_ROOT = ''
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_DIR = os.path.join(BASE_DIR, '../blog')
 
-STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles/')
+STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
 
 # Additional locations of static files
