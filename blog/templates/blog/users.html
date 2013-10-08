@@ -1,0 +1,22 @@
+{% extends "blog/base.html" %}
+
+{% block jumbo %}
+    <div class="jumbotron">
+      <div class="container">
+        <h1 class="topfix">Users</h1>
+        <p>See the list of users</p>
+      </div>
+    </div>
+{% endblock jumbo %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-lg-11 centered">
+      {% for user in users %}
+      <br />
+      {{user.username}} {{user.name}} 
+      {% endfor %}
+    </div>
+  </div>
+
+{% endblock %}

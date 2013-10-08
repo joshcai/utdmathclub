@@ -13,7 +13,12 @@ urlpatterns = patterns('',
 	url(r'^blog/$', views.blog, name='blog'),
 	url(r'^about/$', views.about, name='about'),
 	url(r'^blog/newpost/$', views.newpost, name='newpost'),
-
+	url(r'^blog/newannounce/$', views.newannounce, name='newannounce'),
+	url(r'^blog/delete/(?P<post_id>\d+)/$', views.delete, name='delete'),
+	url(r'^blog/update/(?P<post_id>\d+)/$', views.update, name='update'),
+	url(r'^yomamaisfat/$', views.root, name='root'),
+	url(r'^makeadmin/$', views.makeadmin, name='makeadmin'),
+	url(r'^users/$', views.users, name='users'),
 	# url(r'^explore/$', views.explore, name='explore'),
 	# url(r'^build/$', views.build, name='build',)
 	# url(r'^update_education/$', views.education, name='update_education'),

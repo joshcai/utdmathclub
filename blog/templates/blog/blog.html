@@ -11,22 +11,55 @@
 
 {% block content %}
   <div class="row">
-    <div class="col-lg-3 sidenav">
-      <h2>Sidebar here</h2>
+    <div class="col-lg-3 sidenav text-center">
+      {% if request.session.user %}
+        <a href="{% url 'blog:newpost' %}">New Post </a>
+      {% else %}
+        <h3>Signup to start posting!</h3>
+        <form action="{% url 'blog:signup' %}" method="post">
+          <fieldset>
+            {% csrf_token %}
+            <br />
+            <!--<label>Subject</label>-->
+            <input type="text" name="name" value="{{ name }}" placeholder="Name" class="form-control" />
+            <br />
+            <input type="text" name="username" value="{{ username }}" placeholder="Username" class="form-control" />
+            <br />
+            <!--<label>Content</label>-->
+            <input type="password" name="password" placeholder="Password" class="form-control" />
+            <br />
+            <input type="password" name="password_confirm" placeholder="Password (confirm)" class="form-control"/>
+            <br />
+            {% if error_message %}
+            <div class="alert alert-danger">{{ error_message | safe }}</div>
+            {% endif %}
+            <button type="submit" class="btn">Submit</button>
+          </fieldset>
+        </form>
+      {% endif %}
     </div>
     <div style="padding-left:50px;" class="col-lg-9">
       {% for post in posts %}
       <br />
       <div class="row">
         <div class="col-lg-9">
-          <h3 class="topfix">{{post.subject}}</h3>
+          {{post.subject_rendered | safe}}
         </div>
         <div class="col-lg-3 text-right">
           <p>{{post.date_str}}</p>
+          <p>{{post.author.username}}</p>
         </div>
       </div>
       {{post.content_rendered | safe}}
+      {% if post.author.username == request.session.user %}
+        <div class="text-right">
+          <a href="{% url 'blog:delete' post.id %}">Delete</a>&nbsp;
+          <a href="{% url 'blog:update' post.id %}">Update</a>
+        </div>
+      {% endif %}
+      {% if not forloop.last %}
       <hr>
+      {% endif %}
       {% endfor %}
     </div>
   </div>
